@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="css/mycss.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <script src="js/myfunctions.js"></script>
+    <title>Exercise 3 - Internet Programming Course template</title>
+</head>
+<body class="body">
+<div class="container-fluid">
+    <div class="loading row" id="gifSection"></div>
+    <div>
+        <img class="img-fluid"
+             src="https://mars.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/00022/opgs/edr/ncam/NLA_399449733EDR_F0030106NCAM00411M_.JPG"
+             alt="mars" style="height: 400px;width: 100%">
+        <div class="row">
+            <!--a card with information the exercise-->
+            <div class="centered col-sm-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Mars Images Browser</h5>
+                        <p class="card-text">Browse NASA mars images and save your preferred ones.</p>
+                        <a href="#" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#whoAmI">
+                            <img src="images/round_help_black_24dp.png" alt="information">
+                            <span>Who are we</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- a modal with information about us -->
+        <div class="modal fade" id="whoAmI" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Who are we?</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Shaked Vaknin </h6>
+                        <p>Email: shakedva@edu.hac.ac.il </p>
+                        <h6>Noy Tal</h6>
+                        <p>Email: noyta@edu.hac.ac.il</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--the section where the user enters the data they want to search for-->
+    <div class="row">
+        <div class="col-12 col-md-6">
+            <br/>
+            <h3> Search For Images</h3>
+            <div>
+                <label class="form-label"> Date YYYY-MM-DD or Sol </label>
+                <input type="text" class="date form-control" id="date" required>
+                <div class="text-danger errormessage"></div>
+                <br/>
+            </div>
+            <!-- form select for all the missions -->
+            <label class="form-label"> Select Mission </label>
+            <select class="form-select" aria-label="missionSelect" id="missionSelect">
+                <option selected>Choose a mission</option>
+                <option value="0">Curiosity</option>
+                <option value="1">Opportunity</option>
+                <option value="2">Spirit</option>
+            </select>
+            <div class="text-danger errormessage"></div>
+            <br/>
+            <!-- form select for all the cameras -->
+            <label class="form-label"> Select Camera </label>
+            <select class="form-select" id="cameraSelect" aria-label="cameraSelect">
+                <option selected>Choose a camera</option>
+                <option value="FHAZ">FHAZ</option>
+                <option value="RHAZ">RHAZ</option>
+                <option value="MAST">MAST</option>
+                <option value="CHEMCAM">CHEMCAM</option>
+                <option value="MAHLI">MAHLI</option>
+                <option value="MARDI">MARDI</option>
+                <option value="NAVCAM">NAVCAM</option>
+                <option value="PANCAM">PANCAM</option>
+                <option value="MINITES">MINITES</option>
+            </select>
+            <div class="text-danger errormessage"></div>
+            <br/>
+
+            <button type="button" id="searchBtn" class="btn btn-outline-secondary">
+                <img src="images/round_search_black_24dp.png" alt="search">
+                <span>Search</span>
+            </button>
+            <button type="button" id="clearBtn" class="btn btn-outline-secondary">
+                <img src="images/round_clear_black_24dp.png" alt="clear">
+                <span>Clear</span>
+            </button>
+            <br/><br/>
+        </div>
+        <!--section for all the saved images-->
+        <div class="col-12 col-md-6">
+            <br/>
+            <h3> Saved Images</h3>
+            <button type="button" id="startSlidShowBtn" class="btn btn-outline-secondary">
+                <img src="images/round_play_arrow_black_24dp.png" alt="start slide show">
+                <span>Start Slide Show</span>
+            </button>
+            <button type="button" id="stopSlidShowBtn" class="btn btn-outline-secondary">
+                <img src="images/round_pause_black_24dp.png" alt="stop slide show">
+                <span>Stop Slide Show</span>
+            </button>
+            <br/>
+            <ol id="savedImgSection">
+            </ol>
+        </div>
+    </div>
+
+    <!-- Button to trigger the modal that shows an error -->
+    <button type="button" class="btn btn-primary d-none" id="ghostBtn" data-bs-toggle="modal"
+            data-bs-target="#photoSavedError"> Launch modal
+    </button>
+
+    <!-- Modal for error message in case someone saved the same picture twice-->
+    <div class="modal fade" id="photoSavedError" tabindex="-1" aria-labelledby="photoSavedError" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Information</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    This image is already saved.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Carousel for saved images-->
+    <div id="carouselSavedImages" class="carousel carousel-dark slide d-none" data-bs-ride="carousel">
+        <div class="carousel-inner" id="carousel-inner"></div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselSavedImages" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselSavedImages" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+        <br/>
+    </div>
+    <!--section for all the search results-->
+    <div class="row">
+        <div class="col-12">
+            <h3> Search Results </h3>
+            <br/>
+            <div class="row" id="data"></div>
+        </div>
+    </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj"
+        crossorigin="anonymous"></script>
+</body>
+</html>

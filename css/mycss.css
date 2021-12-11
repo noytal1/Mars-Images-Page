@@ -1,0 +1,56 @@
+.body
+{
+    font-family: "Century Gothic", Bahnschrift, serif;
+    margin: 20px 30px 30px;
+}
+
+.center, .img-fluid
+{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.centered {
+    position: absolute;
+    top: 10em;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.loading
+{
+    position: absolute;
+    top: 30em;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+h3,.modal-header
+{
+    background-color: bisque;
+    padding: 6px;
+    border-radius: 12px;
+    background-image: linear-gradient(#ff7e47, #e27b58 ,#ff9d6f);
+    opacity: 90%;
+}
+#cardImg
+{
+    width: 286px;
+    height: 286px;
+}
+
+.carousel-inner img
+{
+    margin: auto;
+    width: 432px;
+    height: 432px;
+}
+button > img,
+button > span,
+a > span
+{
+    vertical-align: middle;
+}
+#startSlidShowBtn,
+#stopSlidShowBtn
+{
+    margin-bottom: 5px;
+}
